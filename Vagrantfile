@@ -7,11 +7,11 @@
 # you're doing.
 Vagrant.configure(2) do |config|
 
-  config.vm.box = "ubuntu"
+  config.vm.box = "ubuntu/trusty64"
   config.vm.hostname = "myprecise.box"
   config.vm.network :private_network, ip: "192.168.0.42"
   config.vm.network "forwarded_port", guest: 80, host: 8888
-  config.vm.synced_folder "src/", "/var"
+  #config.vm.synced_folder "src/", "/var"
   
   config.vm.provider :virtualbox do |vb|
     vb.customize [
@@ -29,6 +29,7 @@ Vagrant.configure(2) do |config|
      sudo apt-get install -y apache2 php5 git
      sudo rm -R /var/www
      sudo git clone https://github.com/ABCD-STUDY/ABCDreport.git /var/www
+     sudo cp /var/www/code/php/passwords.json_master /var/www/code/php/password.json
      sudo git clone https://github.com/ABCD-STUDY/timeline-followback.git /var/www/applications/timeline-followback
      sudo git clone https://github.com/ABCD-STUDY/little-man-task.git /var/www/applications/little-man-task
   SHELL
