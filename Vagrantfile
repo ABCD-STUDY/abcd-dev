@@ -11,7 +11,7 @@ Vagrant.configure(2) do |config|
   config.vm.hostname = "myprecise.box"
   config.vm.network :private_network, ip: "192.168.0.42"
   config.vm.network "forwarded_port", guest: 80, host: 8888
-  #config.vm.synced_folder "src/", "/var"
+  config.vm.synced_folder "src/", "/var/www/html", owner: "www-data", group: "www-data"
   
   config.vm.provider :virtualbox do |vb|
     vb.customize [
@@ -27,12 +27,6 @@ Vagrant.configure(2) do |config|
   config.vm.provision "shell", inline: <<-SHELL
      sudo apt-get update
      sudo apt-get install -y apache2 php5 git
-     sudo rm -R /var/www/html
-     sudo git clone https://github.com/ABCD-STUDY/ABCDreport.git /var/www/html
-     sudo cp /var/www/html/code/php/passwords.json_master /var/www/html/code/php/password.json
-     sudo chmod 777 /var/www/code/php
-     sudo chmod 777 /var/www/code/php/passwords.json
-     sudo git clone https://github.com/ABCD-STUDY/timeline-followback.git /var/www/html/applications/timeline-followback
-     sudo git clone https://github.com/ABCD-STUDY/little-man-task.git /var/www/html/applications/little-man-task
+     sudo rm /var/www/html/index.html
   SHELL
 end
