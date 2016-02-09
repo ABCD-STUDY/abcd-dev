@@ -30,6 +30,8 @@ Vagrant.configure(2) do |config|
      sudo rm -R /var/www/html
      sudo git clone https://github.com/ABCD-STUDY/ABCDreport.git /var/www/html
      sudo cp /var/www/html/code/php/passwords.json_master /var/www/html/code/php/password.json
+     sudo chmod 777 /var/www/code/php
+     sudo chmod 777 /var/www/code/php/passwords.json
      sudo git clone https://github.com/ABCD-STUDY/timeline-followback.git /var/www/html/applications/timeline-followback
      sudo git clone https://github.com/ABCD-STUDY/little-man-task.git /var/www/html/applications/little-man-task
   SHELL
