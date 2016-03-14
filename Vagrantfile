@@ -9,7 +9,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.box = "ubuntu/trusty64"
   config.vm.hostname = "myprecise.box"
-  config.vm.network :private_network, ip: "192.168.0.42"
+  config.vm.network :private_network, ip: "192.168.1.42"
   config.vm.network "forwarded_port", guest: 80, host: 8888
   config.vm.synced_folder "src/", "/var/www/html", owner: "www-data", group: "www-data"
   
@@ -26,7 +26,13 @@ Vagrant.configure(2) do |config|
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
      sudo apt-get update
-     sudo apt-get install -y apache2 php5 git
-     sudo rm /var/www/html/index.html
+     sudo apt-get install -y language-pack-en-base software-properties-common
+     sudo LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php
+     sudo apt-get update
+     sudo apt-get install -y apache2 git
+     sudo apt-get install -y php7.0 php7.0-fpm php7.0-curl php7.0-gd php7.0-json php7.0-mcrypt php7.0-opcache php7.0-xml libapache2-mod-php7.0
+     sudo apt-get --purge autoremove -y
+     sudo service apache2 restart
+     #sudo rm /var/www/html/index.html
   SHELL
 end
