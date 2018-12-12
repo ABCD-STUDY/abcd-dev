@@ -1,35 +1,13 @@
 # abcd-dev
-A basic ABCD development environment running ubuntu, apache2 and php7.
+A basic ABCD development environment running Ubuntu, Apache2 and PHP 7.0.33 using docker containers.
 
-After you install Vagrant and VirtualBox create a local copy of the applications you want to develop:
-
+A handy `run.sh` shell script handles the creation of docker images and containers. This will create a doocker image with the name abcd-dev and a docker container called abcd.
 ```
-   mkdir src
-   git clone https://github.com/ABCD-STUDY/ABCDreport.git src
-   cp  src/code/php/passwords.json_master src/code/php/passwords.json
-   git clone https://github.com/ABCD-STUDY/little-man-task.git src/applications/little-man-task
-   git clone https://github.com/ABCD-STUDY/timeline-followback.git src/applications/timeline-followback
-   git clone https://github.com/ABCD-STUDY/enroll.git src/applications/enroll
-   git clone https://github.com/ABCD-STUDY/stroop-task.git src/applications/stroop
+  chmod +x run.sh
+   ./run.sh
 ```
 
-Start the virtual machine using:
-
+The docker container's port 80 (for web applications) is mapped onto the host's port 80 as well. As such, web applications within the docker container can be accessed with the following url:
 ```
-   /usr/local/bin/vagrant up
+   http://localhost/
 ```
-
-If you have not updated this project in a while do a (after vagrant up):
-
-```
-  vagrant provision
-```
-
-A local copy of the report webpage should now be available as
-```
-   http://localhost:8888/
-```
-
-Note: Some projects might depend on symbolic links to particular versions of for example javascript libraries. These links or copies have to be created manually.
-
-Note: Vagrant uses VirtualBox in this setup. Some computers will require certain BIOS features to be enabled to support virtualization.
